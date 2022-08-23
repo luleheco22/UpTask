@@ -15,10 +15,12 @@ const ConfirmAccount = () => {
            try {
             const url= `/users/confirm/${id}`
             const {data}=await axiosClient(url)
-            setAlert({
+            setTimeout(() => {
+              setAlert({
                 msg:data.msg,
                 error:false
             })
+            }, 2000);
             setConfirmedAccount(true)
          
            } catch (error) {
@@ -30,6 +32,8 @@ const ConfirmAccount = () => {
            }
        }
        confirmAccount()
+       setAlert({})
+    
     }, [])
 
     const {msg}=alert

@@ -5,14 +5,18 @@ export const emailRegister = async (data) => {
     const transport = nodemailer.createTransport({
         host: process.env.EMAIL_HOST,
         port: process.env.PORT,
+        secure:true,
         auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS
+        },
+        tls: {
+            rejectUnauthorized: false
         }
     });
 
 
-    const info = await transport.sendMail({
+    await transport.sendMail({
         from: '"UpTask - Project Manager" <accounts@uptask.com>',
         to: email,
         subject: "UpTask - Check your account",
@@ -33,14 +37,20 @@ export const emailForgetPassword = async (data) => {
     const transport = nodemailer.createTransport({
         host: process.env.EMAIL_HOST,
         port: process.env.PORT,
+        secure:true,
         auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS
         }
     });
 
+     transport.verify().then(()=>{
+        console.log('Ready')
+     })
+     
 
-    const info = await transport.sendMail({
+
+     await transport.sendMail({
         from: '"UpTask - Project Manager" <accounts@uptask.com>',
         to: email,
         subject: "UpTask - Reset your password",
