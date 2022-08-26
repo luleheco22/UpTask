@@ -3,23 +3,27 @@ import nodemailer from 'nodemailer'
 export const emailRegister = async (data) => {
     const { name, email, token } = data
     const transport = nodemailer.createTransport({
+        // service: "hotmail",
         host: process.env.EMAIL_HOST,
         port: process.env.PORT,
-        secure: true,
-        //secureConnection: false,
+        //secure: false,
+        secureConnection: false,
         auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS
         },
         tls: {
-            rejectUnauthorized: false
-            //ciphers:'SSLv3'
-        }
+            ciphers: "SSLv3", //for outlook
+            rejectUnauthorized: false, // do not fail on invalid certs
+          },
+        //   logger: true,
+        //   // transactionLog: true, // include SMTP traffic in the logs
+        //   allowInternalNetworkInterfaces: false,
     });
 
 
     await transport.sendMail({
-        from: '"UpTask - Project Manager" <uptask.info@gmail.com>',
+        from: '"UpTask - Project Manager" <uptaskmanager@outlook.com>',
         to: email,
         subject: "UpTask - Check your account",
         text: "Check your account on UpTask",
@@ -37,18 +41,22 @@ export const emailRegister = async (data) => {
 export const emailForgetPassword = async (data) => {
     const { name, email, token } = data
     const transport = nodemailer.createTransport({
+       // service: "hotmail",
         host: process.env.EMAIL_HOST,
         port: process.env.PORT,
-        secure: true,
-        //secureConnection: false,
+        //secure: false,
+        secureConnection: false,
         auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS
         },
         tls: {
-            rejectUnauthorized: false
-            //ciphers:'SSLv3'
-        }
+            ciphers: "SSLv3", //for outlook
+            rejectUnauthorized: false, // do not fail on invalid certs
+          },
+        //   logger: true,
+        //   // transactionLog: true, // include SMTP traffic in the logs
+        //   allowInternalNetworkInterfaces: false,
     });
 
     transport.verify().then(() => {
@@ -58,7 +66,7 @@ export const emailForgetPassword = async (data) => {
 
 
     await transport.sendMail({
-        from: '"UpTask - Project Manager" <uptask.info@gmail.com>',
+        from: '"UpTask - Project Manager" <uptaskmanager@outlook.com>',
         to: email,
         subject: "UpTask - Reset your password",
         text: "Reset your password",

@@ -3,12 +3,14 @@ import { Link,useNavigate } from "react-router-dom";
 import Alert from "../components/Alert";
 import axiosClient from "../config/axiosClient";
 import useAuth from "../hooks/useAuth";
-
+import {useAuth0} from '@auth0/auth0-react'
 
 const Login = () => {
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
   const [alert,setAlert]=useState({})
+
+  const{loginWithRedirect}=useAuth0()
 
   const {setAuth}=useAuth()
   const navigate=useNavigate()
@@ -22,6 +24,7 @@ const Login = () => {
          })
          return
      }
+
      try {
      const {data}= await axiosClient.post('/users/login',{
           email,
@@ -95,6 +98,18 @@ const Login = () => {
             hover:cursor-pointer hover:bg-sky-800 transition-colors mb-5"
         />
       </form>
+
+        {/* <button
+        type="button"
+        className="bg-sky-700 w-full py-3 text-white uppercase font-fredoka font-bold rounded
+        hover:cursor-pointer hover:bg-sky-800 transition-colors mb-5"
+     onClick={()=>loginWithRedirect()}
+        >
+          Log in
+        </button> */}
+          
+          
+         
 
       <nav className="lg:flex lg:justify-between">
         <Link
