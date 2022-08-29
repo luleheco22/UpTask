@@ -195,7 +195,6 @@ const ProjectsProvider = ({ children }) => {
 
   const createTask = async (task) => {
 
-   console.log(task,'tareaaaaaaaaaaaaaaaa');
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
