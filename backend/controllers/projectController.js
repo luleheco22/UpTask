@@ -130,7 +130,7 @@ const deleteProject = async (req, res) => {
 const searchCollaborator = async (req, res) => {
     const { email } = req.body
 
-    const user = await User.findOne({ email }).select('-confirm,-createAdt,-password,-token,-updateAt,-__v')
+    const user = await User.findOne({ email }).query.select('-confirm,-createAdt,-password,-token,-updateAt,-__v')
 
     if (!user) {
         const error = new Error('User not found')

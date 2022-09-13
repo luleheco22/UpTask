@@ -13,7 +13,7 @@ const Search = () => {
     const {seeker,handleSeeker, projects}=useProjects()
     
     const leakedProjects=search==='' ? [] : projects.filter(project=>project.name.toLowerCase().includes(search.toLowerCase()))
-    console.log(projects,'accaaaa')
+   
     return (
         <Transition.Root show={seeker} as={Fragment} afterLeave={()=>setSearch('')}>
             <Dialog as="div" className="fixed inset-0 z-10 overflow-y-auto mt-20 p-4 sm:p-20 md:p-20" onClose={ handleSeeker}>
